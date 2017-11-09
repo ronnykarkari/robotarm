@@ -8,18 +8,28 @@
             var robotArm = new RobotArm(canvas);
             
             // Het level inladen
-            robotArm.loadLevel("exercise 1");
+            robotArm.loadLevel("exercise 10");
             
             // Jou instructies volgen hier
-            robotArm.moveRight();
+            robotArm.speed = 1000;
             robotArm.grab();
-            robotArm.moveLeft();
-            robotArm.drop();
-           
-            
+            var amount = 9;
 
+            for (var m = 0; m < 5; m++) {
+                for (var n = 0; n < amount; n++)
+                robotArm.moveRight();
 
-            
+                amount--;
+                robotArm.drop();
+
+                for (var n = 0; n < amount; n++)
+                    robotArm.moveLeft();
+
+                amount--;
+                if (amount >= 1) 
+                    robotArm.grab();
+
+            }
             // De door jou opgegeven instructies uitvoeren
             robotArm.run();
         </script>

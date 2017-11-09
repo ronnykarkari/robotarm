@@ -1,0 +1,68 @@
+<html>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+            // Robotarm bibliotheek inladen
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            
+            // Het level inladen
+            robotArm.randomLevel();
+            
+            // Jou instructies volgen hier
+            robotArm.speed = 700;
+            for(var g = 0; g < 5; g++){
+            robotArm.grab();
+                for(var r = 0; r < 5; r++){
+                    robotArm.moveRight();
+                }
+            robotArm.drop();
+            robotArm.moveRight();
+
+                for(var l = 0; l < 5; l++){
+                    robotArm.moveLeft();
+                }
+        }
+       // 
+        for(var z = 0; z < 5; z++){
+            robotArm.moveLeft();
+            robotArm.grab();
+            color = robotArm.scan();
+            if (color === null ){
+                robotArm.moveLeft();
+                    robotArm.grab();
+                    color = robotArm.scan();
+                    if (color === null ){
+                        robotArm.moveLeft();
+                        robotArm.grab();
+                        color = robotArm.scan();
+                            if (color === null ){
+                            robotArm.moveLeft();
+                            robotArm.grab();
+                            }
+                            else{
+                                robotArm.moveRight();
+                                robotArm.moveRight();
+                                robotArm.drop();
+                            }
+                    }
+                    else{
+                        robotArm.moveRight();
+                        robotArm.drop();
+                    }
+
+            }
+            else{
+                    robotArm.drop();
+                }
+            }
+
+//-------------------------------------------------------------------------
+//-------------------------------------------------------------------------
+        
+    
+            robotArm.run();
+        </script>
+    </body>
+</html>
